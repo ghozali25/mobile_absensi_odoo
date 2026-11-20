@@ -5,6 +5,17 @@ Branch ini mengadaptasi aplikasi ke **Odoo 18** dengan modul API baru
 server terpusat di **`.env`** lewat `src/config.js` — tidak ada lagi URL
 Odoo yang hardcoded di kode.
 
+### Dokumentasi API
+- **Halaman dokumentasi (GitHub Pages):**
+  https://ghozali25.github.io/mobile_absensi_odoo/api/ — semua 72 endpoint
+  dengan contoh request & respons.
+- **Koleksi Postman:**
+  [`docs/api/ag-rest-api.postman_collection.json`](docs/api/ag-rest-api.postman_collection.json)
+  (variable `base_url` + `token`; base URL default mengarah ke mock server).
+- **Mock server (coba tanpa Odoo):**
+  [`docs/api/mock-server.py`](docs/api/mock-server.py) — `python3 mock-server.py`,
+  melayani semua endpoint di `http://localhost:8072`.
+
 ### Setup .env (wajib sebelum `npm run dev`)
 ```bash
 cp .env.example .env
@@ -32,20 +43,18 @@ Lapisan API (`src/services/api.js`) mengembalikan mock JSON lokal dari
 `src/mocks/*.json` tanpa network — login memakai user mock (AG Test).
 Cocok untuk demo / tes UI tanpa server Odoo.
 
-### Alur auth (session Odoo)
-1. Login: `POST /web/session/authenticate` bawaan Odoo
-   (`{db, login, password}`) -> cookie sesi.
-2. Semua endpoint data: `POST {VITE_API_BASE}/*` (JSON biasa) dengan
-   cookie sesi (`credentials: 'include'`). Tanpa sesi -> JSON 401.
-3. Tidak ada lagi Bearer token, password RPC di localStorage, maupun
-   direct `/jsonrpc` execute_kw — semua sudah dihapus di branch ini.
+### Alur auth (Bearer token)
+1. Login: `POST {VITE_API_BASE}/auth/token` (`{db, login, password}`) -> token Bearer.
+2. Semua endpoint data: `POST {VITE_API_BASE}/*` (JSON biasa) dengan header
+   `Authorization: Bearer <token>`. Tanpa token valid -> JSON 401
+   (`NO_TOKEN` / `INVALID_TOKEN` / `TOKEN_EXPIRED`) — bukan redirect HTML.
+3. Sejak modul 18.0.1.2.3, cookie sesi Odoo TIDAK diterima — hanya Bearer token.
+   Logout: `POST {VITE_API_BASE}/auth/logout` (token pemanggil dicabut).
 
 ### Catatan penting untuk APK
-Cookie sesi Odoo tidak punya atribut SameSite sehingga browser/WebView
-menganggapnya Lax: fetch lintas origin dari WebView Capacitor kemungkinan
-**tidak** membawa cookie. Untuk APK produksi, sajikan API lewat origin
-yang sama (reverse proxy satu origin). Jangan pernah mematikan auth
-untuk mengatasi ini. (Catatan ini juga ada di `src/config.js`.)
+Auth memakai header Bearer (bukan cookie sesi), jadi tidak ada masalah
+SameSite cookie di WebView Capacitor. Jangan pernah mematikan auth
+untuk mengatasi masalah jaringan — perbaiki URL/origin-nya.
 
 ### Build APK (tetap sama seperti dulu)
 Lihat "How to Compile" di bawah. APK **tidak** dibangun di sandbox ini

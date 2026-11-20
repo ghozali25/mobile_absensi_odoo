@@ -1,0 +1,2439 @@
+{
+  "info": {
+    "name": "Ali Attendance API (ag_rest_api)",
+    "_postman_id": "ag-rest-api-odoo18",
+    "description": "Kontrak API modul Odoo 18 ag_rest_api untuk aplikasi mobile Ali Attendance. Base URL default mengarah ke mock server lokal (python3 mock-server.py, port 8072). Ganti base_url ke URL Odoo untuk memakai server asli. Isi token dari POST auth/token ke variable token.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:8072"
+    },
+    {
+      "key": "token",
+      "value": ""
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{token}}"
+      }
+    ]
+  },
+  "item": [
+    {
+      "name": "Attendance",
+      "item": [
+        {
+          "name": "POST attendance/break",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/ag_rest_api/v1/attendance/break",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "ag_rest_api",
+                "v1",
+                "attendance",
+                "break"
+              ]
+            },
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"action\": \"start\"\n}"
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST attendance/clock-in",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/ag_rest_api/v1/attendance/clock-in",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "ag_rest_api",
+                "v1",
+                "attendance",
+                "clock-in"
+              ]
+            },
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"latitude\": -6.2,\n  \"longitude\": 106.8,\n  \"mock_detected\": false,\n  \"device_name\": \"Android Smartphone\",\n  \"face_score\": 0.92,\n  \"photo\": null\n}"
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST attendance/clock-out",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/ag_rest_api/v1/attendance/clock-out",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "ag_rest_api",
+                "v1",
+                "attendance",
+                "clock-out"
+              ]
+            },
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"latitude\": -6.2,\n  \"longitude\": 106.8\n}"
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST attendance/history",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/ag_rest_api/v1/attendance/history",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "ag_rest_api",
+                "v1",
+                "attendance",
+                "history"
+              ]
+            },
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"date_from\": \"2026-10-01\",\n  \"date_to\": \"2026-10-31\",\n  \"limit\": 100\n}"
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET attendance/photo/<attendance_id>/<kind>",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/ag_rest_api/v1/attendance/photo/<attendance_id>/<kind>",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "ag_rest_api",
+                "v1",
+                "attendance",
+                "photo",
+                "<attendance_id>",
+                "<kind>"
+              ]
+            },
+            "description": "Bukan JSON: mengembalikan biner foto (image/jpeg) clock-in atau clock-out milik attendance itu. kind = clock-in | clock-out. Memakai header Authorization: Bearer <token> seperti endpoint lain; tanpa token valid -> JSON error 401."
+          },
+          "response": []
+        },
+        {
+          "name": "POST attendance/status",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/ag_rest_api/v1/attendance/status",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "ag_rest_api",
+                "v1",
+                "attendance",
+                "status"
+              ]
+            },
+            "description": ""
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "POST auth/change-password",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/ag_rest_api/v1/auth/change-password",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "ag_rest_api",
+                "v1",
+                "auth",
+                "change-password"
+              ]
+            },
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"old_password\": \"lama123\",\n  \"new_password\": \"baru12345\"\n}"
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST auth/logout",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/ag_rest_api/v1/auth/logout",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "ag_rest_api",
+                "v1",
+                "auth",
+                "logout"
+              ]
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "name": "POST auth/me",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/ag_rest_api/v1/auth/me",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "ag_rest_api",
+                "v1",
+                "auth",
+                "me"
+              ]
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "name": "POST auth/token",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/ag_rest_api/v1/auth/token",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "ag_rest_api",
+                "v1",
+                "auth",
+                "token"
+              ]
+            },
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"db\": \"tester\",\n  \"login\": \"agtest\",\n  \"password\": \"********\"\n}"
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Bawahan",
+      "item": [
+        {
+          "name": "POST subordinates/list",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/ag_rest_api/v1/subordinates/list",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "ag_rest_api",
+                "v1",
+                "subordinates",
+                "list"
+              ]
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "name": "POST subordinates/month",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/ag_rest_api/v1/subordinates/month",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "ag_rest_api",
+                "v1",
+                "subordinates",
+                "month"
+              ]
+            },
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"employee_id\": 195,\n  \"month\": 10,\n  \"year\": 2026\n}"
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST team/org-chart",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/ag_rest_api/v1/team/org-chart",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "ag_rest_api",
+                "v1",
+                "team",
+                "org-chart"
+              ]
+            },
+            "description": ""
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Config",
+      "item": [
+        {
+          "name": "POST config/public",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/ag_rest_api/v1/config/public",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "ag_rest_api",
+                "v1",
+                "config",
+                "public"
+              ]
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "name": "GET mobile/features",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/ag_rest_api/v1/mobile/features",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "ag_rest_api",
+                "v1",
+                "mobile",
+                "features"
+              ]
+            },
+            "description": "Daftar toggle fitur mobile dari model hrms.mobile.feature (dibaca langsung tiap request, termasuk yang nonaktif — app yang hide dari flag active). Bila model belum terinstall -> error FEATURES_UNAVAILABLE 503."
+          },
+          "response": []
+        },
+        {
+          "name": "POST server-time",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/ag_rest_api/v1/server-time",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "ag_rest_api",
+                "v1",
+                "server-time"
+              ]
+            },
+            "description": ""
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Cuti & Dinas",
+      "item": [
+        {
+          "name": "POST timeoff/cancel",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/ag_rest_api/v1/timeoff/cancel",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "ag_rest_api",
+                "v1",
+                "timeoff",
+                "cancel"
+              ]
+            },
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"leave_id\": 5,\n  \"reason\": \"Jadwal berubah\"\n}"
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST timeoff/history",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/ag_rest_api/v1/timeoff/history",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "ag_rest_api",
+                "v1",
+                "timeoff",
+                "history"
+              ]
+            },
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"limit\": 50\n}"
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST timeoff/request",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/ag_rest_api/v1/timeoff/request",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "ag_rest_api",
+                "v1",
+                "timeoff",
+                "request"
+              ]
+            },
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"type_id\": 2,\n  \"date_from\": \"2026-12-07\",\n  \"date_to\": \"2026-12-08\",\n  \"reason\": \"Sakit\"\n}"
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST timeoff/types",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/ag_rest_api/v1/timeoff/types",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "ag_rest_api",
+                "v1",
+                "timeoff",
+                "types"
+              ]
+            },
+            "description": ""
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Dashboard",
+      "item": [
+        {
+          "name": "POST dashboard/summary",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/ag_rest_api/v1/dashboard/summary",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "ag_rest_api",
+                "v1",
+                "dashboard",
+                "summary"
+              ]
+            },
+            "description": ""
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Denda",
+      "item": [
+        {
+          "name": "POST denda/rules",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/ag_rest_api/v1/denda/rules",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "ag_rest_api",
+                "v1",
+                "denda",
+                "rules"
+              ]
+            },
+            "description": ""
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Dinas",
+      "item": [
+        {
+          "name": "POST dinas/list",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/ag_rest_api/v1/dinas/list",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "ag_rest_api",
+                "v1",
+                "dinas",
+                "list"
+              ]
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "name": "POST dinas/request",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/ag_rest_api/v1/dinas/request",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "ag_rest_api",
+                "v1",
+                "dinas",
+                "request"
+              ]
+            },
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"kota_tujuan\": \"Bandung\",\n  \"instansi_tujuan\": \"Klien X\",\n  \"keperluan\": \"Survey\",\n  \"tanggal_mulai\": \"2026-12-14\",\n  \"tanggal_selesai\": \"2026-12-15\"\n}"
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Dokumen",
+      "item": [
+        {
+          "name": "POST dokumen/preview",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/ag_rest_api/v1/dokumen/preview",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "ag_rest_api",
+                "v1",
+                "dokumen",
+                "preview"
+              ]
+            },
+            "description": "Bukan JSON: mengembalikan biner lampiran (PDF/gambar) untuk preview di app. Body EITHER {modul, id} ATAU {attachment_id}. modul = payslip | reimbursement | timeoff | ... ; id = id record di modul itu.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"modul\": \"payslip\",\n  \"id\": 5\n}"
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Employee",
+      "item": [
+        {
+          "name": "POST employee/list",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/ag_rest_api/v1/employee/list",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "ag_rest_api",
+                "v1",
+                "employee",
+                "list"
+              ]
+            },
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"limit\": 100\n}"
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST employee/photo",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/ag_rest_api/v1/employee/photo",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "ag_rest_api",
+                "v1",
+                "employee",
+                "photo"
+              ]
+            },
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"photo\": \"<base64>\"\n}"
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET employee/photo/<employee_id>",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/ag_rest_api/v1/employee/photo/<employee_id>",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "ag_rest_api",
+                "v1",
+                "employee",
+                "photo",
+                "<employee_id>"
+              ]
+            },
+            "description": "Bukan JSON: mengembalikan biner avatar_128 employee (image/png). Endpoint sendiri (bukan /web/image) karena tag <img> browser tidak bisa mengirim header Authorization dan app tidak punya sesi Odoo. Tanpa token valid -> JSON error 401."
+          },
+          "response": []
+        },
+        {
+          "name": "POST employee/profile",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/ag_rest_api/v1/employee/profile",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "ag_rest_api",
+                "v1",
+                "employee",
+                "profile"
+              ]
+            },
+            "description": ""
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Face",
+      "item": [
+        {
+          "name": "POST face/enroll",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/ag_rest_api/v1/face/enroll",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "ag_rest_api",
+                "v1",
+                "face",
+                "enroll"
+              ]
+            },
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"face_descriptor\": [\n    0.1,\n    0.2,\n    0.3\n  ],\n  \"photo\": null,\n  \"device_name\": \"Android Smartphone\"\n}"
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST face/status",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/ag_rest_api/v1/face/status",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "ag_rest_api",
+                "v1",
+                "face",
+                "status"
+              ]
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "name": "POST face/unregister",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/ag_rest_api/v1/face/unregister",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "ag_rest_api",
+                "v1",
+                "face",
+                "unregister"
+              ]
+            },
+            "description": ""
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "KPI",
+      "item": [
+        {
+          "name": "POST kpi/latest",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/ag_rest_api/v1/kpi/latest",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "ag_rest_api",
+                "v1",
+                "kpi",
+                "latest"
+              ]
+            },
+            "description": ""
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Laporan Masalah",
+      "item": [
+        {
+          "name": "POST issue/detail",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/ag_rest_api/v1/issue/detail",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "ag_rest_api",
+                "v1",
+                "issue",
+                "detail"
+              ]
+            },
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": 1\n}"
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST issue/list",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/ag_rest_api/v1/issue/list",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "ag_rest_api",
+                "v1",
+                "issue",
+                "list"
+              ]
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "name": "POST issue/submit",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/ag_rest_api/v1/issue/submit",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "ag_rest_api",
+                "v1",
+                "issue",
+                "submit"
+              ]
+            },
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"judul\": \"Uji tiket\",\n  \"kategori_masalah\": \"sistem_error\",\n  \"deskripsi\": \"Tes API\"\n}"
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Lembur",
+      "item": [
+        {
+          "name": "POST overtime/approve",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/ag_rest_api/v1/overtime/approve",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "ag_rest_api",
+                "v1",
+                "overtime",
+                "approve"
+              ]
+            },
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"overtime_id\": 1,\n  \"action\": \"approve\"\n}"
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST overtime/cancel",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/ag_rest_api/v1/overtime/cancel",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "ag_rest_api",
+                "v1",
+                "overtime",
+                "cancel"
+              ]
+            },
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"overtime_id\": 1\n}"
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST overtime/history",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/ag_rest_api/v1/overtime/history",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "ag_rest_api",
+                "v1",
+                "overtime",
+                "history"
+              ]
+            },
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"limit\": 50\n}"
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST overtime/request",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/ag_rest_api/v1/overtime/request",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "ag_rest_api",
+                "v1",
+                "overtime",
+                "request"
+              ]
+            },
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"date\": \"2026-10-26\",\n  \"notes\": \"Lembur uji\",\n  \"proposed_hours\": 2\n}"
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Pengajuan Absensi",
+      "item": [
+        {
+          "name": "POST attendance-request/cancel",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/ag_rest_api/v1/attendance-request/cancel",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "ag_rest_api",
+                "v1",
+                "attendance-request",
+                "cancel"
+              ]
+            },
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": 1\n}"
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST attendance-request/detail",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/ag_rest_api/v1/attendance-request/detail",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "ag_rest_api",
+                "v1",
+                "attendance-request",
+                "detail"
+              ]
+            },
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": 1\n}"
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST attendance-request/list",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/ag_rest_api/v1/attendance-request/list",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "ag_rest_api",
+                "v1",
+                "attendance-request",
+                "list"
+              ]
+            },
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"limit\": 50\n}"
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST attendance-request/submit",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/ag_rest_api/v1/attendance-request/submit",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "ag_rest_api",
+                "v1",
+                "attendance-request",
+                "submit"
+              ]
+            },
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"request_date\": \"2026-11-05\",\n  \"check_in_time\": \"08:00\",\n  \"check_out_time\": \"17:00\",\n  \"reason\": \"Lupa absen masuk\"\n}"
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Pengumuman",
+      "item": [
+        {
+          "name": "POST announcement/detail",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/ag_rest_api/v1/announcement/detail",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "ag_rest_api",
+                "v1",
+                "announcement",
+                "detail"
+              ]
+            },
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"announcement_id\": 1\n}"
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST announcement/list",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/ag_rest_api/v1/announcement/list",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "ag_rest_api",
+                "v1",
+                "announcement",
+                "list"
+              ]
+            },
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"limit\": 50\n}"
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST announcement/mark_read",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/ag_rest_api/v1/announcement/mark_read",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "ag_rest_api",
+                "v1",
+                "announcement",
+                "mark_read"
+              ]
+            },
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"announcement_id\": 1\n}"
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Persetujuan",
+      "item": [
+        {
+          "name": "POST approvals/act",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/ag_rest_api/v1/approvals/act",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "ag_rest_api",
+                "v1",
+                "approvals",
+                "act"
+              ]
+            },
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"leave_id\": 5,\n  \"action\": \"approve\"\n}"
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST approvals/history",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/ag_rest_api/v1/approvals/history",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "ag_rest_api",
+                "v1",
+                "approvals",
+                "history"
+              ]
+            },
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"limit\": 50\n}"
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST approvals/inbox",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/ag_rest_api/v1/approvals/inbox",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "ag_rest_api",
+                "v1",
+                "approvals",
+                "inbox"
+              ]
+            },
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"limit\": 50\n}"
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Reimbursement",
+      "item": [
+        {
+          "name": "POST reimbursement/approve",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/ag_rest_api/v1/reimbursement/approve",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "ag_rest_api",
+                "v1",
+                "reimbursement",
+                "approve"
+              ]
+            },
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"sheet_id\": 2,\n  \"action\": \"approve\"\n}"
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST reimbursement/detail",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/ag_rest_api/v1/reimbursement/detail",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "ag_rest_api",
+                "v1",
+                "reimbursement",
+                "detail"
+              ]
+            },
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"expense_id\": 4\n}"
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST reimbursement/jenis",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/ag_rest_api/v1/reimbursement/jenis",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "ag_rest_api",
+                "v1",
+                "reimbursement",
+                "jenis"
+              ]
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "name": "POST reimbursement/list",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/ag_rest_api/v1/reimbursement/list",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "ag_rest_api",
+                "v1",
+                "reimbursement",
+                "list"
+              ]
+            },
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"limit\": 50\n}"
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST reimbursement/submit",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/ag_rest_api/v1/reimbursement/submit",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "ag_rest_api",
+                "v1",
+                "reimbursement",
+                "submit"
+              ]
+            },
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"description\": \"Uji reimburse\",\n  \"total_amount\": 50000,\n  \"expense_date\": \"2026-10-26\"\n}"
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Shift & Jadwal",
+      "item": [
+        {
+          "name": "POST calendar/schedule",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/ag_rest_api/v1/calendar/schedule",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "ag_rest_api",
+                "v1",
+                "calendar",
+                "schedule"
+              ]
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "name": "POST shift/today",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/ag_rest_api/v1/shift/today",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "ag_rest_api",
+                "v1",
+                "shift",
+                "today"
+              ]
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "name": "POST shift/upcoming",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/ag_rest_api/v1/shift/upcoming",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "ag_rest_api",
+                "v1",
+                "shift",
+                "upcoming"
+              ]
+            },
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"days\": 30\n}"
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Slip Gaji",
+      "item": [
+        {
+          "name": "POST payslip/detail",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/ag_rest_api/v1/payslip/detail",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "ag_rest_api",
+                "v1",
+                "payslip",
+                "detail"
+              ]
+            },
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"slip_id\": 3\n}"
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST payslip/list",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/ag_rest_api/v1/payslip/list",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "ag_rest_api",
+                "v1",
+                "payslip",
+                "list"
+              ]
+            },
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"limit\": 24\n}"
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Tracking",
+      "item": [
+        {
+          "name": "GET tracking/live",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/ag_rest_api/v1/tracking/live",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "ag_rest_api",
+                "v1",
+                "tracking",
+                "live"
+              ]
+            },
+            "description": "Bukan JSON biasa: Server-Sent Events (text/event-stream) berisi posisi live terakhir tiap employee (dari tracking/ping). Memakai header Authorization: Bearer <token>."
+          },
+          "response": []
+        },
+        {
+          "name": "POST tracking/ping",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/ag_rest_api/v1/tracking/ping",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "ag_rest_api",
+                "v1",
+                "tracking",
+                "ping"
+              ]
+            },
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"latitude\": -6.2,\n  \"longitude\": 106.8,\n  \"accuracy_m\": 10,\n  \"battery_level\": 80,\n  \"mock_detected\": false\n}"
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Tugas",
+      "item": [
+        {
+          "name": "POST task/detail",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/ag_rest_api/v1/task/detail",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "ag_rest_api",
+                "v1",
+                "task",
+                "detail"
+              ]
+            },
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": 1\n}"
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST task/list",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/ag_rest_api/v1/task/list",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "ag_rest_api",
+                "v1",
+                "task",
+                "list"
+              ]
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "name": "POST task/update-status",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/ag_rest_api/v1/task/update-status",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "ag_rest_api",
+                "v1",
+                "task",
+                "update-status"
+              ]
+            },
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": 1,\n  \"status\": \"selesai\",\n  \"progres\": 100\n}"
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Tukar Jadwal",
+      "item": [
+        {
+          "name": "POST swap/cancel",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/ag_rest_api/v1/swap/cancel",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "ag_rest_api",
+                "v1",
+                "swap",
+                "cancel"
+              ]
+            },
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": 3\n}"
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST swap/colleague-schedule",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/ag_rest_api/v1/swap/colleague-schedule",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "ag_rest_api",
+                "v1",
+                "swap",
+                "colleague-schedule"
+              ]
+            },
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"colleague_id\": 195\n}"
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST swap/count",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/ag_rest_api/v1/swap/count",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "ag_rest_api",
+                "v1",
+                "swap",
+                "count"
+              ]
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "name": "POST swap/history",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/ag_rest_api/v1/swap/history",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "ag_rest_api",
+                "v1",
+                "swap",
+                "history"
+              ]
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "name": "POST swap/init",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/ag_rest_api/v1/swap/init",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "ag_rest_api",
+                "v1",
+                "swap",
+                "init"
+              ]
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "name": "POST swap/respond",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/ag_rest_api/v1/swap/respond",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "ag_rest_api",
+                "v1",
+                "swap",
+                "respond"
+              ]
+            },
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": 3,\n  \"aksi\": \"setuju\",\n  \"catatan\": \"OK\"\n}"
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST swap/submit",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/ag_rest_api/v1/swap/submit",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "ag_rest_api",
+                "v1",
+                "swap",
+                "submit"
+              ]
+            },
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"pegawai_tujuan_id\": 195,\n  \"alasan\": \"Keperluan keluarga\"\n}"
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
