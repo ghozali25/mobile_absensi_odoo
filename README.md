@@ -16,6 +16,58 @@ Odoo yang hardcoded di kode.
   [`docs/api/mock-server.py`](docs/api/mock-server.py) — `python3 mock-server.py`,
   melayani semua endpoint di `http://localhost:8072`.
 
+### Langkah integrasi (end-to-end)
+Urutan lengkap dari server Odoo sampai APK jalan:
+
+**1. Minta modulnya.** `ag_rest_api` dan dependensinya `hrms_suite` adalah
+modul privat — tidak ada di repo ini. Minta file ZIP keduanya ke
+maintainer repo ini (@ghozali25).
+
+**2. Install di Odoo 18** (urutan penting: `hrms_suite` dulu, baru
+`ag_rest_api`, karena `ag_rest_api` bergantung pada `hrms_suite`):
+```bash
+# lewat UI: Apps -> Update Apps List -> cari modulnya -> Install
+# atau salin folder modul ke addons path, lalu Update Apps List -> Install
+```
+Sesudah install, restart server Odoo.
+
+**3. Konfigurasi `server_wide_modules` (wajib bila server Odoo punya lebih
+dari 1 database).** Tanpa ini, semua endpoint API menjawab 404 karena
+Odoo tidak me-routing request tanpa sesi database. Di `odoo.conf`:
+```ini
+server_wide_modules = base,web,ag_rest_api
+```
+Lalu restart server Odoo. (Server 1 database tidak wajib, tapi tidak
+ada ruginya dipasang.)
+
+**4. Setting di Odoo.** Buka **Settings → Attendances → Pengaturan
+Aplikasi Mobile**, isi:
+- **Origin CORS yang Diizinkan** — origin aplikasi (mis. `capacitor://localhost`,
+  `http://localhost`) dipisah koma. Tanpa ini, request dari WebView ditolak CORS.
+- **Masa Berlaku Token (hari)** — default 30. Token kedaluwarsa menjawab
+  `TOKEN_EXPIRED` dan aplikasi wajib login ulang.
+- **Toleransi Keterlambatan (menit)** — default 15.
+- **Aplikasi Mobile Aktif** — harus aktif, kalau tidak live tracking ditolak server.
+- Pastikan minimal 1 **lokasi kantor** (office point + radius geofence) aktif
+  di data lokasi HRMS — aplikasi membacanya dari `config/public`.
+
+**5. Setup aplikasi.** Ikuti [Setup .env](#setup-env-wajib-sebelum-npm-run-dev)
+di bawah (isi `VITE_ODOO_URL` dengan URL server Odoo + `VITE_ODOO_DB`
+dengan nama databasenya), lalu `npm run dev` untuk coba.
+
+**6. Build APK.** Ikuti [How to Compile](#how-to-compile) di bawah.
+
+**Troubleshooting**
+
+| Gejala | Penyebab & perbaikan |
+|---|---|
+| Semua endpoint 404 | `server_wide_modules` belum berisi `ag_rest_api` (langkah 3) + restart |
+| 401 `NO_TOKEN` | Header `Authorization: Bearer <token>` tidak terkirim — login dulu |
+| 401 `INVALID_TOKEN` | Token dicabut (logout) — login ulang |
+| 401 `TOKEN_EXPIRED` | Token lewat masa berlaku — login ulang |
+| Error CORS di WebView | Origin aplikasi belum masuk daftar CORS (langkah 4) |
+| Clock-in ditolak `OUT_OF_RADIUS` | Posisi di luar radius lokasi kantor |
+
 ### Setup .env (wajib sebelum `npm run dev`)
 ```bash
 cp .env.example .env
